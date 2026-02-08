@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>I'm Sorry Gabbuu ❤️</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            min-height: 100dvh;
+            font-family: "Poppins", Arial, sans-serif;
+            background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            touch-action: manipulation;
+        }
+
+        /* Floating hearts */
+        .heart {
+            position: fixed;
+            font-size: 20px;
+            animation: float 6s linear infinite;
+            opacity: 0.7;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh);
+            }
+
+            100% {
+                transform: translateY(-10vh);
+            }
+        }
+
+        /* Card */
+        .card {
+            background: white;
+            width: 90%;
+            max-width: 360px;
+            padding: 30px 20px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            animation: pop 0.6s ease;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-size: clamp(18px, 5vw, 22px);
+            color: #333;
+            margin: 0 0 10px 0;
+        }
+
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            min-height: 120px;
+        }
+
+        button {
+            padding: 14px 32px;
+            font-size: 18px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            min-width: 140px;
+            min-height: 48px;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        #yes {
+            background: linear-gradient(135deg, #56ab2f, #a8e063);
+            color: white;
+            box-shadow: 0 4px 15px rgba(86, 171, 47, 0.4);
+        }
+
+        #yes:hover {
+            box-shadow: 0 6px 20px rgba(86, 171, 47, 0.6);
+        }
+
+        #no {
+            background: linear-gradient(135deg, #f44336, #ff7961);
+            color: white;
+            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.4);
+            position: fixed;
+            z-index: 100;
+            transition: none;
+        }
+
+        #no.in-card {
+            position: relative;
+            left: auto !important;
+            top: auto !important;
+        }
+
+        /* Popup */
+        .popup {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .popup-content {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+            animation: pop 0.5s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .popup-content img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            max-height: 40vh;
+            object-fit: cover;
+        }
+
+        .popup-content h2 {
+            color: #333;
+            font-size: clamp(18px, 5vw, 24px);
+            margin: 10px 0;
+        }
+
+        .popup-content p {
+            color: #666;
+            font-size: clamp(14px, 4vw, 16px);
+            margin: 10px 0 0 0;
+        }
+
+        .close-hint {
+            font-size: 12px;
+            color: #999;
+            margin-top: 15px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 380px) {
+            .card {
+                padding: 25px 15px;
+            }
+
+            button {
+                padding: 12px 28px;
+                font-size: 16px;
+                min-width: 120px;
+            }
+        }
+
+        @media (max-height: 600px) {
+            .buttons {
+                min-height: 100px;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <h1>Gabbuu 🥺<br>Will you forgive your brother?</h1>
+
+        <div class="buttons">
+            <button id="yes">Yes ❤️</button>
+            <button id="no" class="in-card">No 😠</button>
+        </div>
+    </div>
+
+    <!-- popup -->
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <img src="happy.jpg" alt="Our Happy Moment">
+            <h2>Thank you Gabbuu ❤️</h2>
+            <p>I'm really sorry… I love you so much 💕</p>
+            <p class="close-hint">Tap anywhere to close</p>
+        </div>
+    </div>
+
+    <script>
+        // Create floating hearts after DOM is ready
+        document.addEventListener("DOMContentLoaded", function () {
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement("div");
+                heart.className = "heart";
+                heart.innerHTML = "💖";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+                heart.style.animationDelay = (Math.random() * 5) + "s";
+                document.body.appendChild(heart);
+            }
+        });
+
+        const noBtn = document.getElementById("no");
+        const yesBtn = document.getElementById("yes");
+        const popup = document.getElementById("popup");
+
+        let hasTriedNo = false;
+
+        function moveNo(e) {
+            // Prevent default to avoid any scroll issues on touch
+            if (e) {
+                e.preventDefault();
+            }
+
+            // Remove the in-card class to enable fixed positioning
+            noBtn.classList.remove("in-card");
+            hasTriedNo = true;
+
+            // Calculate safe bounds with padding
+            const padding = 20;
+            const btnWidth = noBtn.offsetWidth;
+            const btnHeight = noBtn.offsetHeight;
+            const maxX = window.innerWidth - btnWidth - padding;
+            const maxY = window.innerHeight - btnHeight - padding;
+
+            // Generate random position within safe bounds
+            const x = Math.max(padding, Math.random() * maxX);
+            const y = Math.max(padding, Math.random() * maxY);
+
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
+        }
+
+        // Desktop hover event
+        noBtn.addEventListener("mouseenter", moveNo);
+
+        // Touch events for mobile
+        noBtn.addEventListener("touchstart", moveNo, { passive: false });
+
+        // Also move on click/tap in case it somehow gets clicked
+        noBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            moveNo(e);
+        });
+
+        // Yes button shows popup
+        yesBtn.addEventListener("click", function () {
+            popup.style.display = "flex";
+        });
+
+        // Close popup when clicking outside or tapping
+        popup.addEventListener("click", function () {
+            popup.style.display = "none";
+        });
+
+        // Prevent popup content clicks from closing
+        popup.querySelector(".popup-content").addEventListener("click", function (e) {
+            e.stopPropagation();
+        });
+
+        // Handle window resize to keep button in bounds
+        window.addEventListener("resize", function () {
+            if (hasTriedNo && !noBtn.classList.contains("in-card")) {
+                const btnWidth = noBtn.offsetWidth;
+                const btnHeight = noBtn.offsetHeight;
+                const currentX = parseInt(noBtn.style.left) || 0;
+                const currentY = parseInt(noBtn.style.top) || 0;
+
+                const maxX = window.innerWidth - btnWidth - 20;
+                const maxY = window.innerHeight - btnHeight - 20;
+
+                if (currentX > maxX) noBtn.style.left = Math.max(20, maxX) + "px";
+                if (currentY > maxY) noBtn.style.top = Math.max(20, maxY) + "px";
+            }
+        });
+    </script>
+
+</body>
+
+</html>
