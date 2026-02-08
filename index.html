@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>I'm Sorry Gabbuu ❤️</title>
 
+    <!-- Cute Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
     <style>
         * {
             box-sizing: border-box;
@@ -16,8 +23,10 @@
             margin: 0;
             min-height: 100vh;
             min-height: 100dvh;
-            font-family: "Poppins", Arial, sans-serif;
-            background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+            font-family: "Nunito", "Quicksand", sans-serif;
+            background: linear-gradient(-45deg, #ffb6c1, #ffc0cb, #ff69b4, #ffb3d9, #ffa6c9);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -25,99 +34,252 @@
             touch-action: manipulation;
         }
 
-        /* Floating hearts */
-        .heart {
-            position: fixed;
-            font-size: 20px;
-            animation: float 6s linear infinite;
-            opacity: 0.7;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        @keyframes float {
+        @keyframes gradientShift {
             0% {
-                transform: translateY(100vh);
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
             }
 
             100% {
-                transform: translateY(-10vh);
+                background-position: 0% 50%;
             }
         }
 
-        /* Card */
-        .card {
+        /* Sparkle effect */
+        .sparkle {
+            position: fixed;
+            width: 6px;
+            height: 6px;
             background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkleAnim 2s linear infinite;
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes sparkleAnim {
+
+            0%,
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Floating hearts */
+        .heart {
+            position: fixed;
+            font-size: clamp(16px, 4vw, 28px);
+            animation: floatHeart 8s ease-in-out infinite;
+            opacity: 0.8;
+            pointer-events: none;
+            z-index: 1;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.8;
+            }
+
+            90% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-20vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Cute Card */
+        .card {
+            background: linear-gradient(145deg, #ffffff, #fff5f7);
             width: 90%;
-            max-width: 360px;
-            padding: 30px 20px;
-            border-radius: 20px;
+            max-width: 340px;
+            padding: 35px 25px;
+            border-radius: 30px;
             text-align: center;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-            animation: pop 0.6s ease;
+            box-shadow:
+                0 20px 60px rgba(255, 105, 180, 0.3),
+                0 0 0 1px rgba(255, 182, 193, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            animation: cardBounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             position: relative;
             z-index: 10;
         }
 
-        @keyframes pop {
+        .card::before {
+            content: "✨";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes cardBounce {
             0% {
-                transform: scale(0.7);
+                transform: scale(0) rotate(-10deg);
                 opacity: 0;
             }
 
+            50% {
+                transform: scale(1.1) rotate(3deg);
+            }
+
             100% {
-                transform: scale(1);
+                transform: scale(1) rotate(0deg);
                 opacity: 1;
             }
         }
 
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
         h1 {
-            font-size: clamp(18px, 5vw, 22px);
+            font-size: clamp(20px, 5.5vw, 26px);
+            font-weight: 800;
             color: #333;
-            margin: 0 0 10px 0;
+            margin: 10px 0 5px 0;
+            line-height: 1.4;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #ff6b95, #ff8fab, #ff6b95);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textShimmer 3s ease infinite;
+        }
+
+        @keyframes textShimmer {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .subtitle {
+            font-size: clamp(14px, 3.5vw, 16px);
+            color: #999;
+            margin-bottom: 25px;
         }
 
         .buttons {
-            margin-top: 30px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
-            min-height: 120px;
+            gap: 18px;
+            min-height: 130px;
         }
 
         button {
-            padding: 14px 32px;
-            font-size: 18px;
+            padding: 16px 40px;
+            font-size: clamp(16px, 4vw, 18px);
+            font-family: "Nunito", sans-serif;
+            font-weight: 700;
             border: none;
-            border-radius: 30px;
+            border-radius: 50px;
             cursor: pointer;
-            min-width: 140px;
-            min-height: 48px;
-            font-weight: 600;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            min-width: 160px;
+            min-height: 54px;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             -webkit-user-select: none;
             user-select: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg,
+                    transparent 30%,
+                    rgba(255, 255, 255, 0.3) 50%,
+                    transparent 70%);
+            transform: rotate(45deg) translateY(100%);
+            transition: transform 0.6s;
+        }
+
+        button:hover::after {
+            transform: rotate(45deg) translateY(-100%);
         }
 
         button:active {
-            transform: scale(0.95);
+            transform: scale(0.92);
         }
 
         #yes {
-            background: linear-gradient(135deg, #56ab2f, #a8e063);
+            background: linear-gradient(135deg, #00c853, #69f0ae, #00e676);
+            background-size: 200% 200%;
+            animation: btnGlow 2s ease infinite;
             color: white;
-            box-shadow: 0 4px 15px rgba(86, 171, 47, 0.4);
+            box-shadow:
+                0 8px 25px rgba(0, 200, 83, 0.4),
+                0 0 0 3px rgba(0, 200, 83, 0.1);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes btnGlow {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+                box-shadow: 0 8px 25px rgba(0, 200, 83, 0.4), 0 0 0 3px rgba(0, 200, 83, 0.1);
+            }
+
+            50% {
+                background-position: 100% 50%;
+                box-shadow: 0 8px 35px rgba(0, 200, 83, 0.6), 0 0 0 5px rgba(0, 200, 83, 0.15);
+            }
         }
 
         #yes:hover {
-            box-shadow: 0 6px 20px rgba(86, 171, 47, 0.6);
+            transform: translateY(-3px) scale(1.02);
         }
 
         #no {
-            background: linear-gradient(135deg, #f44336, #ff7961);
+            background: linear-gradient(135deg, #ff5252, #ff8a80, #ff6e6e);
+            background-size: 200% 200%;
             color: white;
-            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.4);
+            box-shadow: 0 6px 20px rgba(255, 82, 82, 0.35);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
             position: fixed;
             z-index: 100;
             transition: none;
@@ -133,71 +295,143 @@
         .popup {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(255, 182, 193, 0.85);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
             padding: 20px;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .popup-content {
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
+            background: linear-gradient(145deg, #ffffff, #fff8fa);
+            padding: 30px 25px;
+            border-radius: 30px;
             width: 100%;
-            max-width: 350px;
+            max-width: 340px;
             text-align: center;
-            animation: pop 0.5s ease;
+            animation: popupBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             max-height: 90vh;
             overflow-y: auto;
+            box-shadow:
+                0 25px 80px rgba(255, 105, 180, 0.4),
+                0 0 0 1px rgba(255, 182, 193, 0.5);
+            position: relative;
+        }
+
+        .popup-content::before {
+            content: "💕";
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+            animation: heartPulse 1s ease infinite;
+        }
+
+        @keyframes popupBounce {
+            0% {
+                transform: scale(0) rotate(-5deg);
+                opacity: 0;
+            }
+
+            60% {
+                transform: scale(1.05) rotate(2deg);
+            }
+
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes heartPulse {
+
+            0%,
+            100% {
+                transform: translateX(-50%) scale(1);
+            }
+
+            50% {
+                transform: translateX(-50%) scale(1.2);
+            }
         }
 
         .popup-content img {
             width: 100%;
-            border-radius: 15px;
-            margin-bottom: 15px;
-            max-height: 50vh;
+            border-radius: 20px;
+            margin: 10px 0 20px 0;
+            max-height: 45vh;
             object-fit: contain;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 3px solid #fff0f3;
         }
 
         .popup-content h2 {
-            color: #333;
-            font-size: clamp(18px, 5vw, 24px);
+            font-size: clamp(20px, 5.5vw, 26px);
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff6b95, #ff8fab);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin: 10px 0;
         }
 
         .popup-content p {
-            color: #666;
+            color: #888;
             font-size: clamp(14px, 4vw, 16px);
-            margin: 10px 0 0 0;
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        .popup-content .love-msg {
+            color: #ff6b95;
+            font-weight: 600;
+            font-size: clamp(15px, 4vw, 17px);
         }
 
         .close-hint {
             font-size: 12px;
-            color: #999;
-            margin-top: 15px;
+            color: #bbb;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
         }
 
-        /* Responsive adjustments */
+        .close-hint::before,
+        .close-hint::after {
+            content: "💗";
+            font-size: 10px;
+        }
+
+        /* Responsive */
         @media (max-width: 380px) {
             .card {
-                padding: 25px 15px;
+                padding: 30px 20px;
             }
 
             button {
-                padding: 12px 28px;
-                font-size: 16px;
-                min-width: 120px;
+                padding: 14px 32px;
+                min-width: 140px;
             }
         }
 
-        @media (max-height: 600px) {
+        @media (max-height: 650px) {
+            .card {
+                padding: 25px 20px;
+            }
+
             .buttons {
-                min-height: 100px;
-                gap: 10px;
+                min-height: 110px;
+                gap: 12px;
+            }
+
+            .card::before {
+                display: none;
             }
         }
     </style>
@@ -206,7 +440,8 @@
 <body>
 
     <div class="card">
-        <h1>Gabbuu 🥺<br>Will you forgive your brother?</h1>
+        <h1><span class="gradient-text">Gabbuuuuuu</span> 🥺<br><span class="gradient-text">Will you please forgive your
+                brother?</span></h1>
 
         <div class="buttons">
             <button id="yes">Yes ❤️</button>
@@ -218,23 +453,37 @@
     <div class="popup" id="popup">
         <div class="popup-content">
             <img src="happy.jpeg" alt="Our Happy Moment">
-            <h2>Thank you Gabbuu ❤️</h2>
-            <p>I'm really sorry… I love you so much 💕</p>
+            <h2>Thank you Gabbuu! 🎉</h2>
+            <p class="love-msg">I'm really sorry… 💕</p>
+            <p>You're the best sister ever! 🌟</p>
             <p class="close-hint">Tap anywhere to close</p>
         </div>
     </div>
 
     <script>
-        // Create floating hearts after DOM is ready
+        // Create floating hearts
         document.addEventListener("DOMContentLoaded", function () {
-            for (let i = 0; i < 15; i++) {
+            const hearts = ["💖", "💕", "💗", "💓", "💝", "🩷", "❤️", "🌸"];
+
+            for (let i = 0; i < 18; i++) {
                 const heart = document.createElement("div");
                 heart.className = "heart";
-                heart.innerHTML = "💖";
+                heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
                 heart.style.left = Math.random() * 100 + "vw";
-                heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
-                heart.style.animationDelay = (Math.random() * 5) + "s";
+                heart.style.animationDuration = (Math.random() * 4 + 6) + "s";
+                heart.style.animationDelay = (Math.random() * 8) + "s";
                 document.body.appendChild(heart);
+            }
+
+            // Create sparkles
+            for (let i = 0; i < 25; i++) {
+                const sparkle = document.createElement("div");
+                sparkle.className = "sparkle";
+                sparkle.style.left = Math.random() * 100 + "vw";
+                sparkle.style.top = Math.random() * 100 + "vh";
+                sparkle.style.animationDelay = (Math.random() * 3) + "s";
+                sparkle.style.animationDuration = (Math.random() * 2 + 1) + "s";
+                document.body.appendChild(sparkle);
             }
         });
 
@@ -245,23 +494,17 @@
         let hasTriedNo = false;
 
         function moveNo(e) {
-            // Prevent default to avoid any scroll issues on touch
-            if (e) {
-                e.preventDefault();
-            }
+            if (e) e.preventDefault();
 
-            // Remove the in-card class to enable fixed positioning
             noBtn.classList.remove("in-card");
             hasTriedNo = true;
 
-            // Calculate safe bounds with padding
-            const padding = 20;
+            const padding = 25;
             const btnWidth = noBtn.offsetWidth;
             const btnHeight = noBtn.offsetHeight;
             const maxX = window.innerWidth - btnWidth - padding;
             const maxY = window.innerHeight - btnHeight - padding;
 
-            // Generate random position within safe bounds
             const x = Math.max(padding, Math.random() * maxX);
             const y = Math.max(padding, Math.random() * maxY);
 
@@ -269,34 +512,25 @@
             noBtn.style.top = y + "px";
         }
 
-        // Desktop hover event
         noBtn.addEventListener("mouseenter", moveNo);
-
-        // Touch events for mobile
         noBtn.addEventListener("touchstart", moveNo, { passive: false });
-
-        // Also move on click/tap in case it somehow gets clicked
         noBtn.addEventListener("click", function (e) {
             e.preventDefault();
             moveNo(e);
         });
 
-        // Yes button shows popup
         yesBtn.addEventListener("click", function () {
             popup.style.display = "flex";
         });
 
-        // Close popup when clicking outside or tapping
         popup.addEventListener("click", function () {
             popup.style.display = "none";
         });
 
-        // Prevent popup content clicks from closing
         popup.querySelector(".popup-content").addEventListener("click", function (e) {
             e.stopPropagation();
         });
 
-        // Handle window resize to keep button in bounds
         window.addEventListener("resize", function () {
             if (hasTriedNo && !noBtn.classList.contains("in-card")) {
                 const btnWidth = noBtn.offsetWidth;
@@ -304,11 +538,11 @@
                 const currentX = parseInt(noBtn.style.left) || 0;
                 const currentY = parseInt(noBtn.style.top) || 0;
 
-                const maxX = window.innerWidth - btnWidth - 20;
-                const maxY = window.innerHeight - btnHeight - 20;
+                const maxX = window.innerWidth - btnWidth - 25;
+                const maxY = window.innerHeight - btnHeight - 25;
 
-                if (currentX > maxX) noBtn.style.left = Math.max(20, maxX) + "px";
-                if (currentY > maxY) noBtn.style.top = Math.max(20, maxY) + "px";
+                if (currentX > maxX) noBtn.style.left = Math.max(25, maxX) + "px";
+                if (currentY > maxY) noBtn.style.top = Math.max(25, maxY) + "px";
             }
         });
     </script>
